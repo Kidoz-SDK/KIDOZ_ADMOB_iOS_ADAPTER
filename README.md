@@ -11,8 +11,8 @@ Kidoz iOS SDK version 1.3.1
 1. Google AdMob Mobile Ads SDK integrated in your project as explained [HERE](https://developers.google.com/admob/ios/quick-start):
 2. A fully functional AdMob ad placement.
 3. Kidoz SDK built with your project.
-3.1. Please make sure you have a set up Kidoz publisher account.
-3.2. The plugin itself is an iOS static library written in Objective C.
+* Please make sure you have a set up Kidoz publisher account.
+* The plugin itself is an iOS static library written in Objective C.
 
 </br>
 
