@@ -19,7 +19,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [GADMobileAds configureWithApplicationID:ADD_ID];
     return YES;
 }
 

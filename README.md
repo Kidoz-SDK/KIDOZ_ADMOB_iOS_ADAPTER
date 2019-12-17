@@ -1,14 +1,12 @@
-
-
-
 # KIDOZ_ADMOB_ADAPTER_iOS
-Kidoz AdMob mediation adapter for Version 1.1  
-Kidoz iOS SDK version 1.3.1
+Kidoz AdMob mediation adapter for Version 1.5  
+Kidoz iOS SDK version 1.3.4
+Built and tested with Google Mobile Ads SDK 7.52.0
 </br>
 
 **Prerequisits:**
 * To use the Kidoz SDK adapter for AdMob you should make sure you have:
-1. Google AdMob Mobile Ads SDK integrated in your project as explained [HERE](https://developers.google.com/admob/ios/quick-start):
+1. Google Mobile Ads SDK 7.42.2 or higher integrated in your project as explained [HERE](https://developers.google.com/admob/ios/quick-start):
 2. A fully functional AdMob ad placement.
 3. Kidoz SDK built with your project.
 * Please make sure you have a set up Kidoz publisher account.
@@ -51,6 +49,12 @@ KidozAdMobMediationInterstitialAdapter
 * Set the following in the `Class Name` field: </br>
 KidozAdMobMediationRewardedAdapter
 
+    ```
+    Note: for Google Mobile Ads SDK lower than 7.42.2 
+      Set the full path in the Class Name field:  
+      KidozAdMobMediationRewardedLegacyAdapter
+    ```
+
 ### KIDOZ Banner Adapter:
 * Set the following in the `Class Name` field: </br>
 KidozAdMobMediationBannerAdapter</br>
@@ -73,4 +77,4 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
+    

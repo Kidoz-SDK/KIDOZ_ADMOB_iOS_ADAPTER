@@ -13,11 +13,11 @@
 #define INTERSTITIAL_ADUNIT_ID @"ca-app-pub-5967470543517808/9897640434"
 #define REWARDED_ADUNIT_ID @"ca-app-pub-5967470543517808/7581935456"
 
-@interface ViewController () <GADInterstitialDelegate,GADBannerViewDelegate,GADRewardBasedVideoAdDelegate>
+@interface ViewController () <GADInterstitialDelegate,GADBannerViewDelegate,GADRewardedAdDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *logText;
 
-@property(nonatomic, strong) GADRewardBasedVideoAd *rewarded;
+@property(nonatomic, strong) GADRewardedAd *rewardedAd;
 @property(nonatomic, strong) GADInterstitial *interstitial;
 @property(nonatomic, strong) GADBannerView *bannerView;
 
@@ -29,7 +29,6 @@
     [super viewDidLoad];
     [self setBorder];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -64,7 +63,6 @@
 }
 
 
-
 ////////// Interstitial //////////
 - (IBAction)loadInterstitial:(id)sender {
     self.interstitial = [[GADInterstitial alloc] initWithAdUnitID:INTERSTITIAL_ADUNIT_ID];
@@ -74,7 +72,6 @@
     
     [self logOut:@"Load Interstitial" withUITextView:logText withTimestamp:[self getTimestamp]];
 
-    
 }
 
 - (IBAction)showInterstitial:(id)sender {
@@ -83,7 +80,6 @@
         [self logOut:@"Show Interstitial" withUITextView:logText withTimestamp:[self getTimestamp]];
     }else
         [self logOut:@"Interstitial is not ready" withUITextView:logText withTimestamp:[self getTimestamp]];
-
 }
 
 
@@ -125,69 +121,61 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     [self logOut:@"Interstitial Will Leave Application" withUITextView:logText withTimestamp:[self getTimestamp]];
 }
 
-
 ////////// Rewarded //////////////
 - (IBAction)loadRewarded:(id)sender {
-    [GADRewardBasedVideoAd sharedInstance].delegate = self;
-    [[GADRewardBasedVideoAd sharedInstance] loadRequest:[GADRequest request] withAdUnitID:REWARDED_ADUNIT_ID];
-    
+    self.rewardedAd = [[GADRewardedAd alloc] initWithAdUnitID:REWARDED_ADUNIT_ID];
+    GADRequest *request = [GADRequest request];
+    [self.rewardedAd loadRequest:request completionHandler:^(GADRequestError * _Nullable error) {
+        if (error) {
+            [self logOut:@"Rewarded ad failed to load." withUITextView:self.logText withTimestamp:[self getTimestamp]];
+            NSLog(@"Rewarded ad failed to load.");
+        } else {
+            [self logOut:@"Rewarded ad is received." withUITextView:self.logText withTimestamp:[self getTimestamp]];
+            NSLog(@"Rewarded ad is received.");
+        }
+    }];
     [self logOut:@"Load Rewarded" withUITextView:logText withTimestamp:[self getTimestamp]];
 }
 
-
 - (IBAction)showRewarded:(id)sender {
-    if ([[GADRewardBasedVideoAd sharedInstance] isReady]) {
-        [[GADRewardBasedVideoAd sharedInstance] presentFromRootViewController:self];
-        [self logOut:@"Show Rewarded" withUITextView:logText withTimestamp:[self getTimestamp]];
-    }else{
+    if (self.rewardedAd.isReady) {
+        [self.rewardedAd presentFromRootViewController:self delegate:self];
+    } else {
         [self logOut:@"Rewarded is not ready" withUITextView:logText withTimestamp:[self getTimestamp]];
     }
 }
 
-- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didRewardUserWithReward:(GADAdReward *)reward {
+- (void)rewardedAd:(GADRewardedAd *)rewardedAd userDidEarnReward:(GADAdReward *)reward {
     NSString *rewardMessage = [NSString stringWithFormat:@"Reward received with currency %@ , amount %lf",reward.type,[reward.amount doubleValue]];
     NSLog(rewardMessage);
     [self logOut:rewardMessage withUITextView:logText withTimestamp:[self getTimestamp]];
 }
 
-- (void)rewardBasedVideoAdDidReceiveAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    NSLog(@"Reward based video ad is received.");
-    [self logOut:@"Reward based video ad is received." withUITextView:logText withTimestamp:[self getTimestamp]];
-}
-
-- (void)rewardBasedVideoAdDidOpen:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
+/// Tells the delegate that the rewarded ad was presented.
+- (void)rewardedAdDidPresent:(GADRewardedAd *)rewardedAd {
     NSLog(@"Opened reward based video ad.");
     [self logOut:@"Opened reward based video ad." withUITextView:logText withTimestamp:[self getTimestamp]];
 }
 
-- (void)rewardBasedVideoAdDidStartPlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    NSLog(@"Reward based video ad started playing.");
-    [self logOut:@"Reward based video ad started playing." withUITextView:logText withTimestamp:[self getTimestamp]];
-}
-
-- (void)rewardBasedVideoAdDidCompletePlaying:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    NSLog(@"Reward based video ad has completed.");
-    [self logOut:@"Reward based video ad has completed." withUITextView:logText withTimestamp:[self getTimestamp]];
-}
-
-- (void)rewardBasedVideoAdDidClose:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    NSLog(@"Reward based video ad is closed.");
-    [self logOut:@"Reward based video ad is closed." withUITextView:logText withTimestamp:[self getTimestamp]];
-}
-
-- (void)rewardBasedVideoAdWillLeaveApplication:(GADRewardBasedVideoAd *)rewardBasedVideoAd {
-    NSLog(@"Reward based video ad will leave application.");
-    [self logOut:@"Reward based video ad will leave application." withUITextView:logText withTimestamp:[self getTimestamp]];
-}
-
-- (void)rewardBasedVideoAd:(GADRewardBasedVideoAd *)rewardBasedVideoAd didFailToLoadWithError:(NSError *)error {
+/// Tells the delegate that the rewarded ad failed to present.
+- (void)rewardedAd:(GADRewardedAd *)rewardedAd didFailToPresentWithError:(NSError *)error {
     NSLog(@"Reward based video ad failed to load.");
     [self logOut:@"Reward based video ad failed to load." withUITextView:logText withTimestamp:[self getTimestamp]];
+}
+
+/// Tells the delegate that the rewarded ad was dismissed.
+- (void)rewardedAdDidDismiss:(GADRewardedAd *)rewardedAd {
+    NSLog(@"Reward based video ad is closed.");
+    [self logOut:@"Reward based video ad is dismissed." withUITextView:logText withTimestamp:[self getTimestamp]];
 }
 
 
 ////////// Banner //////////
 - (IBAction)loadBanner:(id)sender {
+    if(self.bannerView !=nil){
+        [self.bannerView removeFromSuperview];
+        self.bannerView = nil;
+    }
     self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
     [self addBannerViewToView:self.bannerView];
     self.bannerView.adUnitID = BANNER_ADUNIT_ID;
@@ -196,7 +184,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     [self.bannerView loadRequest:[GADRequest request]];
     
     [self logOut:@"Load Banner" withUITextView:logText withTimestamp:[self getTimestamp]];
-
 }
 
 - (void)addBannerViewToView:(UIView *)bannerView {
@@ -257,7 +244,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView {
     NSLog(@"adViewWillLeaveApplication");
     [self logOut:@"Banner adView WillLeave Application" withUITextView:logText withTimestamp:[self getTimestamp]];
-
 }
 
 
