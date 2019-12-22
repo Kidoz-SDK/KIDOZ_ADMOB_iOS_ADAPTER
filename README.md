@@ -1,5 +1,5 @@
 # KIDOZ_ADMOB_ADAPTER_iOS
-Kidoz AdMob mediation adapter for Version 1.5  
+Kidoz AdMob mediation adapter for Version 1.6  
 Kidoz iOS SDK version 1.3.4
 Built and tested with Google Mobile Ads SDK 7.52.0
 </br>
