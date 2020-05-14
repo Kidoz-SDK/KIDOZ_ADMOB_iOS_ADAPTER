@@ -1,7 +1,8 @@
+
 # KIDOZ_ADMOB_ADAPTER_iOS
 Kidoz AdMob mediation adapter for Version 1.6  
-Kidoz iOS SDK version 1.3.4
-Built and tested with Google Mobile Ads SDK 7.52.0
+Kidoz iOS SDK version 1.3.5
+Built and tested with Google Mobile Ads SDK 7.58.0
 </br>
 
 **Prerequisits:**
@@ -11,6 +12,9 @@ Built and tested with Google Mobile Ads SDK 7.52.0
 3. Kidoz SDK built with your project.
 * Please make sure you have a set up Kidoz publisher account.
 * The plugin itself is an iOS static library written in Objective C.
+
+***This SDK version was verified not to contain the Advertiser Identifier (IDFA) as required by Apple App Store regulation for apps of Kids category.***
+
 
 </br>
 
