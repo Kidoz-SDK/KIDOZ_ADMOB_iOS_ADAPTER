@@ -18,7 +18,7 @@
 		116D6E73218069FD009262FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116D6E72218069FD009262FB /* Assets.xcassets */; };
 		116D6E76218069FD009262FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116D6E74218069FD009262FB /* LaunchScreen.storyboard */; };
 		116D6E79218069FD009262FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D6E78218069FD009262FB /* main.m */; };
-		11CAEC13246D2C350004E718 /* libKidozSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CAEC12246D2C350004E718 /* libKidozSDK.a */; };
+		11B73E0F2546F25900D8BB97 /* libKidozSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B73E0E2546F25900D8BB97 /* libKidozSDK.a */; };
 		11E8F26123AF79AA00016134 /* libKidozAdMobAdapter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11E8F26023AF79AA00016134 /* libKidozAdMobAdapter.a */; };
 		11F73B9521A407D800E4772E /* kidoz_left_side_logo_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F73B9421A407D800E4772E /* kidoz_left_side_logo_small.png */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		116D6E75218069FD009262FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		116D6E77218069FD009262FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		116D6E78218069FD009262FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		11CAEC12246D2C350004E718 /* libKidozSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKidozSDK.a; sourceTree = "<group>"; };
+		11B73E0E2546F25900D8BB97 /* libKidozSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKidozSDK.a; sourceTree = "<group>"; };
 		11E8F26023AF79AA00016134 /* libKidozAdMobAdapter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libKidozAdMobAdapter.a; sourceTree = "<group>"; };
 		11F73B9421A407D800E4772E /* kidoz_left_side_logo_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kidoz_left_side_logo_small.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,7 +53,7 @@
 				11E8F26123AF79AA00016134 /* libKidozAdMobAdapter.a in Frameworks */,
 				111394AF2461652800346DC9 /* GoogleAppMeasurement.framework in Frameworks */,
 				111394AD2461652800346DC9 /* GoogleUtilities.xcframework in Frameworks */,
-				11CAEC13246D2C350004E718 /* libKidozSDK.a in Frameworks */,
+				11B73E0F2546F25900D8BB97 /* libKidozSDK.a in Frameworks */,
 				111394AE2461652800346DC9 /* nanopb.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +99,7 @@
 		11F73B9621A40DCE00E4772E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				11CAEC12246D2C350004E718 /* libKidozSDK.a */,
+				11B73E0E2546F25900D8BB97 /* libKidozSDK.a */,
 				111394AB2461652800346DC9 /* GoogleAppMeasurement.framework */,
 				111394AC2461652800346DC9 /* GoogleMobileAds.framework */,
 				111394A92461652600346DC9 /* GoogleUtilities.xcframework */,
